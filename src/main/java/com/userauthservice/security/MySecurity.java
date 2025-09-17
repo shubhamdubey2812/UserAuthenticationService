@@ -18,8 +18,8 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @RequiredArgsConstructor
 public class MySecurity {
-	@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
         try {
             httpSecurity
                 .csrf(csrf -> csrf.disable())
@@ -38,13 +38,15 @@ public class MySecurity {
             throw new UnauthorizedException("Invalid token");
         }
     }
-	@Bean
-	public PasswordEncoder passwordEncoder() {
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 		
 	}
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 		
 	}
